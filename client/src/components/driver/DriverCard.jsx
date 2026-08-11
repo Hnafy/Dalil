@@ -16,6 +16,11 @@ export default function DriverCard({ driver }) {
       </div>
       <div className="min-w-0 flex-1">
         <p className="truncate font-bold text-slate-800">{driver.name}</p>
+        {driver.phone && (
+          <p className="mt-0.5 truncate text-sm text-slate-500" dir="ltr">
+            {driver.phone}
+          </p>
+        )}
         <span className="badge mt-1.5 bg-brand-50 text-brand-700 ring-1 ring-brand-200 dark:bg-brand-500/10 dark:text-brand-300 dark:ring-brand-500/30">
           {meta.emoji} {t(`drivers.vehicleTypes.${driver.vehicleType}`)}
         </span>

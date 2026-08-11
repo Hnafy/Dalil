@@ -16,7 +16,8 @@ Decisions confirmed with the user:
   page) that shows the drivers of that type.
 - **All** drivers saved in the admin panel appear publicly — no admin toggle.
 - The public Drivers page has **tabs** for the four types plus "All".
-- Driver phone numbers are **NOT exposed publicly** (privacy).
+- Driver phone numbers **ARE shown publicly** on the `/drivers` cards (decision
+  reversed on 2026-08-11; originally hidden for privacy).
 
 ## Approach
 
@@ -53,7 +54,7 @@ Response `200`:
 ```
 
 - `drivers` sorted newest first, **no pagination** (all drivers shown).
-- Driver public shape is `{ id, name, vehicleType, photo }` — **no `phone`**.
+- Driver public shape is `{ id, name, phone, vehicleType, photo }`.
 - `stats` is the count of drivers per vehicle type plus a `total`.
 
 ## Backend
@@ -64,7 +65,8 @@ Response `200`:
 - Build query; if `vehicleType` present, filter by it.
 - One `Promise.all` for the driver list (`.sort({ createdAt: -1 })`) and the
   per-type counts (aggregate `$group`), same pattern as `listDrivers`.
-- Returns `{ drivers, stats }` where each driver is serialized **without phone**.
+- Returns `{ drivers, stats }` where each driver includes `name`, `phone`,
+  `vehicleType`, and `photo`.
 
 ### Controller — `server/src/controllers/driverController.js` (new)
 
@@ -153,6 +155,5 @@ backend suite (`npm test` in `server`) still fully passes.
 ## Out of scope
 
 - No admin "show on home" toggle (all drivers appear).
-- No phone or contact info exposed publicly.
 - No search/pagination on the public page (small expected data set).
 - No changes to the admin Drivers feature or the `Driver` model.

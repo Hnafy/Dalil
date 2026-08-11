@@ -42,7 +42,7 @@ async function listPublicDrivers({ vehicleType = "" }) {
   if (vehicleType) query.vehicleType = vehicleType;
 
   const [drivers, statsRows] = await Promise.all([
-    Driver.find(query).sort({ createdAt: -1 }).select("name vehicleType photo"),
+    Driver.find(query).sort({ createdAt: -1 }).select("name phone vehicleType photo"),
     Driver.aggregate([{ $group: { _id: "$vehicleType", count: { $sum: 1 } } }]),
   ]);
 
@@ -53,7 +53,7 @@ async function listPublicDrivers({ vehicleType = "" }) {
   });
 
   return {
-    drivers: drivers.map((d) => ({ id: d._id, name: d.name, vehicleType: d.vehicleType, photo: d.photo })),
+    drivers: drivers.map((d) => ({ id: d._id, name: d.name, phone: d.phone, vehicleType: d.vehicleType, photo: d.photo })),
     stats,
   };
 }
