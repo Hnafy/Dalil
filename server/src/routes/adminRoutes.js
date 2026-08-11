@@ -4,6 +4,7 @@ const adminController = require("../controllers/adminController");
 const { protect } = require("../middleware/authMiddleware");
 const { restrictTo } = require("../middleware/roleMiddleware");
 const { runValidation } = require("../middleware/validateMiddleware");
+const { upload } = require("../middleware/uploadMiddleware");
 
 const router = express.Router();
 
@@ -120,6 +121,51 @@ router.patch(
 );
 
 router.delete("/categories/:id", idParam, runValidation, adminController.deleteCategory);
+
+// ---------- Drivers ----------
+
+router.get("/drivers", adminController.listDrivers);
+
+router.get("/drivers/:id", idParam, runValidation, adminController.getDriver);
+
+router.post(
+  "/drivers",
+  upload.single("photo"),
+  [
+    body("name").trim().notEmpty().withMessage("Driver name is required.").isLength({ max: 80 }),
+    body("phone")
+      .trim()
+      .notEmpty()
+      .withMessage("Mobile number is required.")
+      .isLength({ max: 20 })
+      .matches(/^\+?[0-9][0-9\s-]{8,19}$/)
+      .withMessage("Enter a valid mobile number."),
+    body("vehicleType").isIn(["motorcycle", "tuk_tuk", "private_car", "pickup_truck"]).withMessage("Invalid vehicle type."),
+  ],
+  runValidation,
+  adminController.createDriver
+);
+
+router.patch(
+  "/drivers/:id",
+  idParam,
+  upload.single("photo"),
+  [
+    body("name").optional().trim().isLength({ max: 80 }),
+    body("phone")
+      .optional()
+      .trim()
+      .isLength({ max: 20 })
+      .matches(/^\+?[0-9][0-9\s-]{8,19}$/)
+      .withMessage("Enter a valid mobile number."),
+    body("vehicleType").optional().isIn(["motorcycle", "tuk_tuk", "private_car", "pickup_truck"]).withMessage("Invalid vehicle type."),
+    body("removePhoto").optional().isBoolean().withMessage("Invalid removePhoto value."),
+  ],
+  runValidation,
+  adminController.updateDriver
+);
+
+router.delete("/drivers/:id", idParam, runValidation, adminController.deleteDriver);
 
 // ---------- Analytics ----------
 

@@ -2,6 +2,7 @@ const shopService = require("../services/shopService");
 const managerService = require("../services/managerService");
 const categoryService = require("../services/categoryService");
 const analyticsService = require("../services/analyticsService");
+const driverService = require("../services/driverService");
 const cloudinaryService = require("../services/cloudinaryService");
 const { asyncHandler } = require("../middleware/errorHandler");
 
@@ -84,6 +85,49 @@ const deleteCategory = asyncHandler(async (req, res) => {
   res.json({ success: true, data: { message: "Category deleted successfully." } });
 });
 
+// ---------- Drivers ----------
+
+const listDrivers = asyncHandler(async (req, res) => {
+  const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+  const limit = Math.min(Math.max(1, parseInt(req.query.limit, 10) || 10), 100);
+  const data = await driverService.listDrivers({
+    search: req.query.search || "",
+    vehicleType: req.query.vehicleType || "",
+    page,
+    limit,
+  });
+  res.json({ success: true, data });
+});
+
+const getDriver = asyncHandler(async (req, res) => {
+  const driver = await driverService.getDriverById(req.params.id);
+  res.json({ success: true, data: { driver: driver.toPublicJSON() } });
+});
+
+const createDriver = asyncHandler(async (req, res) => {
+  let photo;
+  if (req.file) {
+    photo = await cloudinaryService.uploadImageBuffer(req.file.buffer, "dalil/drivers");
+  }
+  const driver = await driverService.createDriver({ ...req.body, photo });
+  res.status(201).json({ success: true, data: { driver: driver.toPublicJSON(), message: "Driver created successfully." } });
+});
+
+const updateDriver = asyncHandler(async (req, res) => {
+  let photo;
+  if (req.file) {
+    photo = await cloudinaryService.uploadImageBuffer(req.file.buffer, "dalil/drivers");
+  }
+  const removePhoto = req.body.removePhoto === true || req.body.removePhoto === "true";
+  const driver = await driverService.updateDriver(req.params.id, { ...req.body, photo, removePhoto });
+  res.json({ success: true, data: { driver: driver.toPublicJSON(), message: "Driver updated successfully." } });
+});
+
+const deleteDriver = asyncHandler(async (req, res) => {
+  await driverService.deleteDriver(req.params.id);
+  res.json({ success: true, data: { message: "Driver deleted successfully." } });
+});
+
 // ---------- Analytics ----------
 
 const getAnalytics = asyncHandler(async (req, res) => {
@@ -105,5 +149,10 @@ module.exports = {
   createCategory,
   updateCategory,
   deleteCategory,
+  listDrivers,
+  getDriver,
+  createDriver,
+  updateDriver,
+  deleteDriver,
   getAnalytics,
 };
