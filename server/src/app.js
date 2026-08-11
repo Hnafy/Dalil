@@ -11,6 +11,7 @@ const categoryRoutes = require("./routes/categoryRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const managerRoutes = require("./routes/managerRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
+const driverRoutes = require("./routes/driverRoutes");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.get("/api/health", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/shops", shopRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/drivers", driverRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/manager", managerRoutes);
 app.use("/api/analytics", analyticsRoutes);

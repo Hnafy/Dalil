@@ -37,6 +37,27 @@ async function listDrivers({ search = "", vehicleType = "", page = 1, limit = 10
   };
 }
 
+async function listPublicDrivers({ vehicleType = "" }) {
+  const query = {};
+  if (vehicleType) query.vehicleType = vehicleType;
+
+  const [drivers, statsRows] = await Promise.all([
+    Driver.find(query).sort({ createdAt: -1 }).select("name vehicleType photo"),
+    Driver.aggregate([{ $group: { _id: "$vehicleType", count: { $sum: 1 } } }]),
+  ]);
+
+  const stats = { total: 0, motorcycle: 0, tuk_tuk: 0, private_car: 0, pickup_truck: 0 };
+  statsRows.forEach((r) => {
+    stats.total += r.count;
+    if (r._id) stats[r._id] = r.count;
+  });
+
+  return {
+    drivers: drivers.map((d) => ({ id: d._id, name: d.name, vehicleType: d.vehicleType, photo: d.photo })),
+    stats,
+  };
+}
+
 async function getDriverById(id) {
   const driver = await Driver.findById(id);
   if (!driver) throw new AppError(404, "Driver not found.");
@@ -91,4 +112,4 @@ async function deleteDriver(id) {
   return driver;
 }
 
-module.exports = { listDrivers, getDriverById, createDriver, updateDriver, deleteDriver };
+module.exports = { listDrivers, listPublicDrivers, getDriverById, createDriver, updateDriver, deleteDriver };
