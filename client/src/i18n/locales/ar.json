@@ -25,6 +25,8 @@
     "adminAnalytics": "الإحصائيات — دليل الإدارة",
     "adminSettings": "الإعدادات — دليل الإدارة",
     "adminDrivers": "سائقو التوصيل — دليل الإدارة",
+    "drivers": "سائقو التوصيل — دليل، أبو غالب",
+    "driversDescription": "تصفح سائقي التوصيل في أبو غالب، مفلترة حسب نوع المركبة.",
     "managerDashboard": "لوحة التحكم — دليل المدير",
     "managerShop": "المحل الخاص بي — دليل المدير",
     "managerGallery": "الصور — دليل المدير",
@@ -124,7 +126,10 @@
     "ownShopTitle": "هل تملك محلًا في {{area}}؟",
     "ownShopText": "اجعل الناس يكتشفونك. اطلب من المسؤول المحلي إضافة عملك إلى دليل «دليل».",
     "exploreDirectory": "استكشف الدليل",
-    "administratorAccess": "دخول الإدارة"
+    "administratorAccess": "دخول الإدارة",
+    "driversEyebrow": "شبكة التوصيل",
+    "driversTitle": "سائقونا للتوصيل",
+    "driversSubtitle": "تصفح سائقي التوصيل في {{area}} حسب نوع المركبة."
   },
   "shops": {
     "title": "كل المحلات",
@@ -537,9 +542,16 @@
     "vehicleTypes": {
       "motorcycle": "موتوسيكل",
       "tuk_tuk": "توك توك",
-      "private_car": "سيارة خاصة",
-      "pickup_truck": "بيك أب / سيارة نقل صغيرة"
-    }
+      "private_car": "عربية ملاكي ",
+      "pickup_truck": " عربية نص نقل "
+    },
+    "allTypes": "كل السائقين",
+    "eyebrow": "سائقو التوصيل",
+    "title": "سائقونا للتوصيل",
+    "subtitle": "تصفح السائقين في {{area}}، مفلترة حسب نوع المركبة.",
+    "noDriversTitle": "لا يوجد سائقون",
+    "noDriversSubtitle": "لا يوجد سائقون في هذه الفئة حتى الآن. عد لاحقًا.",
+    "failedToLoad": "تعذر تحميل السائقين."
   },
   "adminDrivers": {
     "searchPlaceholder": "ابحث في السائقين…",

@@ -25,6 +25,8 @@
     "adminAnalytics": "Analytics — Dalil Admin",
     "adminSettings": "Settings — Dalil Admin",
     "adminDrivers": "Delivery Drivers — Dalil Admin",
+    "drivers": "Delivery Drivers — Dalil, Abou Ghaleb",
+    "driversDescription": "Browse the delivery drivers serving Abou Ghaleb, filtered by vehicle type.",
     "managerDashboard": "Dashboard — Dalil Manager",
     "managerShop": "My Shop — Dalil Manager",
     "managerGallery": "Images — Dalil Manager",
@@ -124,7 +126,10 @@
     "ownShopTitle": "Own a shop in {{area}}?",
     "ownShopText": "Get discovered by people nearby. Ask your local administrator to add your business to the Dalil directory.",
     "exploreDirectory": "Explore the directory",
-    "administratorAccess": "Administrator access"
+    "administratorAccess": "Administrator access",
+    "driversEyebrow": "Delivery network",
+    "driversTitle": "Our delivery drivers",
+    "driversSubtitle": "Browse the delivery drivers in {{area}}, by vehicle type."
   },
   "shops": {
     "title": "All Shops",
@@ -539,7 +544,14 @@
       "tuk_tuk": "Tuk Tuk",
       "private_car": "Private Car",
       "pickup_truck": "Pickup / Small Transport Truck"
-    }
+    },
+    "allTypes": "All Drivers",
+    "eyebrow": "Delivery Drivers",
+    "title": "Our delivery drivers",
+    "subtitle": "Browse the drivers serving {{area}}, filtered by vehicle type.",
+    "noDriversTitle": "No drivers found",
+    "noDriversSubtitle": "There are no drivers in this category yet. Check back soon.",
+    "failedToLoad": "Failed to load drivers."
   },
   "adminDrivers": {
     "searchPlaceholder": "Search drivers…",
