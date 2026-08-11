@@ -8,6 +8,7 @@ import Home from "../pages/public/Home";
 import Shops from "../pages/public/Shops";
 import ShopDetails from "../pages/public/ShopDetails";
 import CategoryShops from "../pages/public/CategoryShops";
+import Drivers from "../pages/public/Drivers";
 import NotFound from "../pages/public/NotFound";
 import AdminLogin from "../pages/auth/AdminLogin";
 import ManagerLogin from "../pages/auth/ManagerLogin";
@@ -35,6 +36,7 @@ export default function AppRoutes() {
         <Route path="/shops" element={<Shops />} />
         <Route path="/shops/:slug" element={<ShopDetails />} />
         <Route path="/categories/:slug" element={<CategoryShops />} />
+        <Route path="/drivers" element={<Drivers />} />
         <Route path="*" element={<NotFound />} />
       </Route>
 
