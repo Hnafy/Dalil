@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, MapPinned, ArrowRight, Sparkles, Store, Clock3 } from "lucide-react";
+import { Search, ArrowRight, Store, Clock3, ShieldCheck } from "lucide-react";
 import { getCategories, getShops } from "../../services/shopService";
 import ShopCard from "../../components/shop/ShopCard";
 import SectionHeading from "../../components/common/SectionHeading";
 import { SkeletonGrid } from "../../components/common/SkeletonCard";
 import EmptyState from "../../components/common/EmptyState";
 import { usePageMeta } from "../../hooks/usePageMeta";
-import { categoryIcon, AREA_NAME } from "../../utils/constants";
+import { categoryIcon, AREA_NAME, VEHICLE_TYPES } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
 import { localize } from "../../utils/i18n";
+import Hero_img from '../../img/hero img.png'
 
 export default function Home() {
   const { t } = useTranslation();
@@ -46,7 +47,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-700">
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_75%_80%,rgba(0,220,210,0.25),transparent_45%),radial-gradient(circle_at_20%_20%,rgba(0,120,120,0.2),transparent_40%),linear-gradient(135deg,#043638_0%,#075153_50%,#087f7d_100%)]">
         <div
           className="pointer-events-none absolute inset-0 opacity-10"
           style={{
@@ -55,37 +56,54 @@ export default function Home() {
             backgroundSize: "32px 32px",
           }}
         />
-        <div className="container-page relative py-20 text-center sm:py-28">
-          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 text-white ring-1 ring-white/20 backdrop-blur">
-            <MapPinned className="h-8 w-8" />
-          </div>
-          <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold text-brand-100 ring-1 ring-white/20">
-            <Sparkles className="h-4 w-4" /> {t("home.guide", { area: AREA_NAME })}
-          </p>
-          <h1 className="mx-auto max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            {t("home.heroTitle")}
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-brand-100">
-            {t("home.heroSubtitle", { area: AREA_NAME })}
-          </p>
+        <div className="container-page relative py-20 sm:py-28">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Text column */}
+            <div className="text-center lg:text-right">
+              <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+                {t("home.heroTitle")}
+              </h1>
+              <p className="mx-auto mt-4 max-w-xl text-lg text-brand-100 lg:mx-0">
+                {t("home.heroSubtitle", { area: AREA_NAME })}
+              </p>
 
-          <form onSubmit={submitSearch} className="mx-auto mt-8 max-w-2xl">
-            <div className="flex items-center gap-2 rounded-2xl bg-white p-2 shadow-lift">
-              <Search className="ml-3 h-5 w-5 shrink-0 text-slate-400" />
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={t("home.searchPlaceholder")}
-                className="w-full bg-transparent py-2.5 text-slate-800 placeholder-slate-400 focus:outline-none dark:text-slate-200 dark:placeholder-slate-600"
-                aria-label={t("home.searchLabel")}
-              />
-              <button type="submit" className="btn-primary shrink-0">
-                {t("home.searchButton")}
-              </button>
+              <form onSubmit={submitSearch} className="mx-auto mt-8 max-w-xl lg:mx-0">
+                <div className="flex items-center gap-2 rounded-full bg-white p-2 shadow-lift">
+                  <Search className="ml-3 h-5 w-5 shrink-0 text-slate-400" />
+                  <input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder={t("home.searchPlaceholder")}
+                    className="w-full bg-transparent py-2.5 text-slate-800 placeholder-slate-400 focus:outline-none dark:text-slate-200 dark:placeholder-slate-600"
+                    aria-label={t("home.searchLabel")}
+                  />
+                  <button type="submit" className="btn-primary shrink-0 !rounded-full">
+                    {t("home.searchButton")}
+                  </button>
+                </div>
+              </form>
+
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-sm font-semibold text-brand-100 lg:justify-start">
+                <ShieldCheck className="h-4 w-4 text-brand-200" />
+                <span>موثوق</span>
+                <span className="text-brand-300">•</span>
+                <span>سريع</span>
+                <span className="text-brand-300">•</span>
+                <span>قريب منك</span>
+              </div>
             </div>
-          </form>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm text-brand-100">
+            {/* Illustration column - desktop only */}
+            <div className="hidden lg:block">
+              <img
+                src={Hero_img}
+                alt={t("brand.tagline")}
+                className="mx-auto w-full max-w-xl select-none drop-shadow-2xl"
+              />
+            </div>
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 text-sm text-brand-100">
             <span className="inline-flex items-center gap-1.5">
               <Store className="h-4 w-4" /> {t("home.browseByCategory")}
             </span>
@@ -180,6 +198,31 @@ export default function Home() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* Drivers */}
+      <section className="border-y border-slate-200 bg-surface py-16">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow={t("home.driversEyebrow")}
+            title={t("home.driversTitle")}
+            subtitle={t("home.driversSubtitle", { area: AREA_NAME })}
+          />
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {VEHICLE_TYPES.map((v) => (
+              <Link
+                key={v.value}
+                to={`/drivers?vehicleType=${v.value}`}
+                className="group card flex flex-col items-center gap-3 p-6 text-center transition hover:-translate-y-1 hover:shadow-lift"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-xl transition group-hover:bg-brand-600 dark:bg-brand-950/40">
+                  {v.emoji}
+                </span>
+                <span className="text-sm font-bold text-slate-800">{t(`drivers.vehicleTypes.${v.value}`)}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* CTA */}
