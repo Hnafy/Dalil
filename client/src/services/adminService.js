@@ -22,3 +22,10 @@ export const adminDeleteCategory = (id) => api.delete(`/admin/categories/${id}`)
 
 // Analytics
 export const adminGetAnalytics = () => api.get("/admin/analytics").then((res) => res.data);
+
+// Drivers
+export const adminGetDrivers = (params) => api.get("/admin/drivers", { params }).then((res) => res.data);
+export const adminGetDriver = (id) => api.get(`/admin/drivers/${id}`).then((res) => res.data);
+export const adminCreateDriver = (formData) => api.post("/admin/drivers", formData).then((res) => res.data);
+export const adminUpdateDriver = (id, formData) => api.patch(`/admin/drivers/${id}`, formData).then((res) => res.data);
+export const adminDeleteDriver = (id) => api.delete(`/admin/drivers/${id}`).then((res) => res.data);

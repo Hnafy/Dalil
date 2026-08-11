@@ -61,3 +61,10 @@ export const CLICK_TYPES = {
 export const SITE_NAME = "Dalil";
 export const AREA_NAME = "Abou Ghaleb";
 export const TAGLINE = "Discover local shops and services in Abou Ghaleb";
+
+export const VEHICLE_TYPES = [
+  { value: "motorcycle", emoji: "🏍️" },
+  { value: "tuk_tuk", emoji: "🛺" },
+  { value: "private_car", emoji: "🚗" },
+  { value: "pickup_truck", emoji: "🚚" },
+];
