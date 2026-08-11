@@ -4,6 +4,7 @@ import { Menu } from "lucide-react";
 import {
   LayoutDashboard,
   Store,
+  Truck,
   Users,
   FolderTree,
   BarChart3,
@@ -20,6 +21,7 @@ export default function AdminLayout() {
   const navItems = [
     { to: "/admin/dashboard", label: t("adminLayout.dashboard"), icon: LayoutDashboard },
     { to: "/admin/shops", label: t("adminLayout.shops"), icon: Store },
+    { to: "/admin/drivers", label: t("adminLayout.drivers"), icon: Truck },
     { to: "/admin/managers", label: t("adminLayout.managers"), icon: Users },
     { to: "/admin/categories", label: t("adminLayout.categories"), icon: FolderTree },
     { to: "/admin/analytics", label: t("adminLayout.analytics"), icon: BarChart3 },
@@ -29,6 +31,7 @@ export default function AdminLayout() {
   const titles = {
     "/admin/dashboard": t("adminLayout.dashboard"),
     "/admin/shops": t("adminLayout.shopManagement"),
+    "/admin/drivers": t("adminLayout.drivers"),
     "/admin/managers": t("adminLayout.managerManagement"),
     "/admin/categories": t("adminLayout.categories"),
     "/admin/analytics": t("adminLayout.analytics"),

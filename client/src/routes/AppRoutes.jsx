@@ -14,6 +14,7 @@ import ManagerLogin from "../pages/auth/ManagerLogin";
 
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminShops from "../pages/admin/AdminShops";
+import AdminDrivers from "../pages/admin/AdminDrivers";
 import AdminManagers from "../pages/admin/AdminManagers";
 import AdminCategories from "../pages/admin/AdminCategories";
 import AdminAnalytics from "../pages/admin/AdminAnalytics";
@@ -51,6 +52,7 @@ export default function AppRoutes() {
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="shops" element={<AdminShops />} />
+        <Route path="drivers" element={<AdminDrivers />} />
         <Route path="managers" element={<AdminManagers />} />
         <Route path="categories" element={<AdminCategories />} />
         <Route path="analytics" element={<AdminAnalytics />} />
