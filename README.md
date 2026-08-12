@@ -92,13 +92,6 @@ copy .env.example .env     # optional: set VITE_BASE_API if API is elsewhere
 npm run dev                # starts on http://localhost:5173
 ```
 
-### 3. Log in
-
-| Role | Email               | Password    |
-|------|---------------------|-------------|
-| Admin | admin@example.com  | Admin@12345 |
-| Manager | manager@tayeb.com | Manager@123 |
-
 ## Tests
 
 The backend ships an automated API integration suite (`server/tests/api.test.js`). It runs
