@@ -29,3 +29,5 @@ coverage/
 scripts/
 tests/
 .agents
+
+docs

@@ -3,6 +3,7 @@ import { MapPinned, LogOut, X } from "lucide-react";
 import useAuthStore from "../../store/useAuthStore";
 import { useTranslation } from "react-i18next";
 import ThemeSwitcher from "../common/ThemeSwitcher";
+import logo from '../../img/logo.png'
 
 export default function Sidebar({ items, brand, onNavigate, open, onClose }) {
   const navigate = useNavigate();
@@ -20,8 +21,8 @@ export default function Sidebar({ items, brand, onNavigate, open, onClose }) {
     <div className="flex h-full flex-col">
       <div className="flex h-16 items-center justify-between px-5">
         <NavLink to="/" className="flex items-center gap-2.5" onClick={onNavigate}>
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white">
-            <MapPinned className="h-5 w-5" />
+          <span className="flex h-9 w-9 items-center justify-center ">
+            <img src={logo} alt="logo" />
           </span>
           <span className="text-lg font-extrabold text-slate-900">{brand}</span>
         </NavLink>

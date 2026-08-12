@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { localize } from "../../utils/i18n";
+import logo from '../../img/logo.png'
 
 const navLinkClass = ({ isActive }) =>
   `rounded-lg px-3 py-2 text-sm font-semibold transition ${
@@ -55,11 +56,11 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-surface/90 backdrop-blur">
       <div className="container-page flex h-16 items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-2.5" onClick={closeAll}>
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-card">
-            <MapPinned className="h-5 w-5" />
+          <span className="flex h-9 w-9 items-center justify-center">
+            <img src={logo} alt="logo" />
           </span>
           <span className="text-xl font-extrabold tracking-tight text-slate-900">
-            Dalil<span className="text-brand-600">.</span>
+            Dalil
           </span>
         </Link>
 

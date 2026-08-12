@@ -226,7 +226,7 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="container-page pb-20">
+      <section className="container-page py-20">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-700 to-brand-900 px-6 py-14 text-center sm:px-12">
           <div
             className="pointer-events-none absolute inset-0 opacity-10"

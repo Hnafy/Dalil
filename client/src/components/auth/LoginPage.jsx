@@ -5,6 +5,7 @@ import { MapPinned, Eye, EyeOff, LogIn } from "lucide-react";
 import useAuthStore from "../../store/useAuthStore";
 import Spinner from "../common/Spinner";
 import { useTranslation } from "react-i18next";
+import logo from '../../img/logo.png'
 
 export default function LoginPage({ role, title, subtitle, redirectTo }) {
   const navigate = useNavigate();
@@ -44,11 +45,11 @@ export default function LoginPage({ role, title, subtitle, redirectTo }) {
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-brand-900 via-brand-800 to-brand-700 px-4">
       <div className="w-full max-w-md">
         <Link to="/" className="mb-8 flex items-center justify-center gap-2.5">
-          <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-brand-700 shadow-lift">
-            <MapPinned className="h-6 w-6" />
+          <span className="flex h-11 w-11">
+            <img src={logo} alt="logo" />
           </span>
           <span className="text-2xl font-extrabold text-white">
-            Dalil<span className="text-brand-300">.</span>
+            Dalil
           </span>
         </Link>
 

@@ -179,7 +179,7 @@ export default function AdminDrivers() {
               {tab.emoji ? tab.emoji : <Users className="h-5 w-5 text-slate-500" />}
             </span>
             <span className="min-w-0">
-              <span className="block truncate text-sm font-semibold text-slate-700 dark:text-slate-200">{tab.label}</span>
+              <span className="block truncate text-sm font-semibold text-slate-700 dark:text-white-700">{tab.label}</span>
               <span className="block text-xs font-bold text-brand-600 dark:text-brand-400">{tab.count ?? "…"}</span>
             </span>
           </button>

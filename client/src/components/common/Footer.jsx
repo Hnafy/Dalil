@@ -3,6 +3,7 @@ import { MapPinned, MapPin, Phone } from "lucide-react";
 import { AREA_NAME } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
+import logo from '../../img/logo.png'
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -11,11 +12,11 @@ export default function Footer() {
       <div className="container-page grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-1">
           <div className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white">
-              <MapPinned className="h-5 w-5" />
+            <span className="flex h-9 w-9 items-center justify-center">
+              <img src={logo} alt="logo" />
             </span>
             <span className="text-xl font-extrabold text-white">
-              Dalil<span className="text-brand-400">.</span>
+              Dalil
             </span>
           </div>
           <p className="mt-4 text-sm leading-relaxed text-slate-400 dark:text-slate-600">{t("brand.description")}</p>
