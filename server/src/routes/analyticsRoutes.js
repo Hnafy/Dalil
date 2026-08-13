@@ -4,6 +4,7 @@ const { body } = require("express-validator");
 const analyticsController = require("../controllers/analyticsController");
 const { runValidation } = require("../middleware/validateMiddleware");
 const { attachVisitorId } = require("../middleware/visitorMiddleware");
+const { VISITOR_ID_MIN_LENGTH, VISITOR_ID_MAX_LENGTH } = require("../utils/visitorCookie");
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ const analyticsLimiter = rateLimit({
 
 const eventValidators = [
   body("shopId").isMongoId().withMessage("Valid shop id is required."),
-  body("visitorId").optional({ checkFalsy: true }).trim().isLength({ min: 6, max: 100 }).withMessage("A visitor id is required."),
+  body("visitorId").optional({ checkFalsy: true }).trim().isLength({ min: VISITOR_ID_MIN_LENGTH, max: VISITOR_ID_MAX_LENGTH }).withMessage("A visitor id is required."),
 ];
 
 const clickValidators = [
@@ -28,7 +29,7 @@ const clickValidators = [
 ];
 
 router.get("/visitor", analyticsLimiter, attachVisitorId, analyticsController.getVisitor);
-router.post("/view", analyticsLimiter, attachVisitorId, eventValidators, runValidation, analyticsController.recordView);
-router.post("/click", analyticsLimiter, attachVisitorId, clickValidators, runValidation, analyticsController.recordClick);
+router.post("/view", analyticsLimiter, eventValidators, runValidation, attachVisitorId, analyticsController.recordView);
+router.post("/click", analyticsLimiter, clickValidators, runValidation, attachVisitorId, analyticsController.recordClick);
 
 module.exports = router;
