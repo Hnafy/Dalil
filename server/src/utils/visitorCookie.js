@@ -19,4 +19,4 @@ function isValidVisitorId(value) {
   return typeof value === "string" && value.trim().length >= VISITOR_ID_MIN_LENGTH && value.trim().length <= VISITOR_ID_MAX_LENGTH;
 }
 
-module.exports = { VISITOR_COOKIE_NAME, VISITOR_ID_MIN_LENGTH, VISITOR_ID_MAX_LENGTH, visitorCookieOptions, isValidVisitorId };
+module.exports = { VISITOR_COOKIE_NAME, VISITOR_COOKIE_MAX_AGE_MS, VISITOR_ID_MIN_LENGTH, VISITOR_ID_MAX_LENGTH, visitorCookieOptions, isValidVisitorId };

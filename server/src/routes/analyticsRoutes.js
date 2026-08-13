@@ -18,7 +18,7 @@ const analyticsLimiter = rateLimit({
 
 const eventValidators = [
   body("shopId").isMongoId().withMessage("Valid shop id is required."),
-  body("visitorId").optional({ checkFalsy: true }).trim().isLength({ min: VISITOR_ID_MIN_LENGTH, max: VISITOR_ID_MAX_LENGTH }).withMessage("A visitor id is required."),
+  body("visitorId").optional({ checkFalsy: true }).isString().trim().isLength({ min: VISITOR_ID_MIN_LENGTH, max: VISITOR_ID_MAX_LENGTH }).withMessage("A visitor id is required."),
 ];
 
 const clickValidators = [
