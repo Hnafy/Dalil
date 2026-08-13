@@ -26,6 +26,16 @@ export function ensureVisitorId() {
   if (pendingPromise) return pendingPromise;
   pendingPromise = fetchVisitorId()
     .then((id) => {
+      let storedId = null;
+      try {
+        storedId = localStorage.getItem(VISITOR_KEY);
+      } catch {
+        // storage unavailable — in-memory only
+      }
+      if (storedId) {
+        cachedId = storedId;
+        return storedId;
+      }
       cachedId = id;
       try {
         localStorage.setItem(VISITOR_KEY, id);
