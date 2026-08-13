@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { ChevronRight, MapPin, Eye, ArrowLeft } from "lucide-react";
 import { getShopBySlug } from "../../services/shopService";
 import { recordView } from "../../services/analyticsService";
-import { getVisitorId } from "../../utils/visitor";
+import { ensureVisitorId } from "../../utils/visitor";
 import ShopGallery from "../../components/shop/ShopGallery";
 import WorkingHoursTable from "../../components/shop/WorkingHoursTable";
 import ContactButtons from "../../components/shop/ContactButtons";
@@ -35,7 +35,7 @@ export default function ShopDetails() {
         if (!active) return;
         setShop(res.data);
         setStatus("ready");
-        recordView(res.data.id, getVisitorId()).catch(() => {});
+        ensureVisitorId().then((id) => recordView(res.data.id, id)).catch(() => {});
       })
       .catch((err) => {
         if (!active) return;

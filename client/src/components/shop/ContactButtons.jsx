@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { recordClick } from "../../services/analyticsService";
-import { getVisitorId } from "../../utils/visitor";
+import { ensureVisitorId } from "../../utils/visitor";
 import { CLICK_TYPES } from "../../utils/constants";
 import { telHref, waHref, mapsHref, cleanPhone } from "../../utils/formatters";
 import { useTranslation } from "react-i18next";
@@ -40,10 +40,9 @@ function Action({ href, icon: Icon, label, color, external = true, onClick }) {
 export default function ContactButtons({ shop, compact = false }) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
-  const visitorId = getVisitorId();
 
   const track = (type) => {
-    recordClick(shop.id, visitorId, type).catch(() => {});
+    ensureVisitorId().then((id) => recordClick(shop.id, id, type)).catch(() => {});
   };
 
   const copyLink = async () => {
