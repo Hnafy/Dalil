@@ -19,6 +19,7 @@ export default function ManagerDashboard() {
   const [data, setData] = useState(null);
   const [manualStatus, setManualStatusState] = useState("auto");
   const [saving, setSaving] = useState(false);
+  const openStatus = useShopStatus(data?.shop?.workingHours, manualStatus);
 
   useEffect(() => {
     let active = true;
@@ -56,7 +57,6 @@ export default function ManagerDashboard() {
   if (!data) return <SkeletonTable rows={4} cols={4} />;
 
   const { shop, totals, ranges, clicks, trend } = data;
-  const openStatus = useShopStatus(shop.workingHours, manualStatus);
 
   const clicksList = [
     { label: t("managerDashboard.phoneClicks"), value: clicks.phone_click || 0, icon: Phone, color: "text-blue-600 bg-blue-50 dark:text-blue-300 dark:bg-blue-500/10" },
