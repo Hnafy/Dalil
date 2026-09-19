@@ -58,7 +58,7 @@ export default function Sidebar({ items, brand, onNavigate, open, onClose }) {
               {user?.name?.[0] || "?"}
             </span>
             <div className="min-w-0">
-              <p className="truncate text-sm font-semibold text-slate-800 dark:text-slate-100">{user?.name}</p>
+              <p className="truncate text-sm font-semibold text-slate-800 dark:text-white-100">{user?.name}</p>
               <p className="truncate text-xs text-slate-400">{user?.email}</p>
             </div>
             <span className="ml-auto">
