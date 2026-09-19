@@ -13,4 +13,7 @@ export const deleteImage = (imageId) =>
 export const updateWorkingHours = (workingHours) =>
   api.patch("/manager/shop/working-hours", { workingHours }).then((res) => res.data);
 
+export const setManualStatus = (manualStatus) =>
+  api.patch("/manager/shop", { manualStatus }).then((res) => res.data);
+
 export const getManagerAnalytics = () => api.get("/manager/analytics").then((res) => res.data);

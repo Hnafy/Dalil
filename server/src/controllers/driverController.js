@@ -1,7 +1,7 @@
 const { asyncHandler, AppError } = require("../middleware/errorHandler");
 const driverService = require("../services/driverService");
 
-const VEHICLE_TYPES = ["motorcycle", "tuk_tuk", "private_car", "pickup_truck"];
+const VEHICLE_TYPES = ["motorcycle", "tuk_tuk", "private_car", "pickup_truck", "bicycle", "tricycle"];
 
 const listDrivers = asyncHandler(async (req, res) => {
   const { vehicleType } = req.query;

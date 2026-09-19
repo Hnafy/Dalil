@@ -67,4 +67,6 @@ export const VEHICLE_TYPES = [
   { value: "tuk_tuk", emoji: "🛺" },
   { value: "private_car", emoji: "🚗" },
   { value: "pickup_truck", emoji: "🚚" },
+  { value: "bicycle", emoji: "🚲" },
+  { value: "tricycle", emoji: "🛴" },
 ];

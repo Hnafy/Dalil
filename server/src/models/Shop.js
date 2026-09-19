@@ -50,6 +50,7 @@ const shopSchema = new mongoose.Schema(
 
     manager: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
     status: { type: String, enum: ["active", "inactive"], default: "active" },
+    manualStatus: { type: String, enum: ["auto", "open", "closed"], default: "auto" },
 
     views: { type: Number, default: 0 },
   },
@@ -78,6 +79,7 @@ shopSchema.methods.toPublicJSON = function () {
     workingHours: this.workingHours,
     images: this.images,
     status: this.status,
+    manualStatus: this.manualStatus,
     views: this.views,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,

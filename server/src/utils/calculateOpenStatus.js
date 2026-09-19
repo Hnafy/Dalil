@@ -26,8 +26,16 @@ function dayKeyForIndex(index) {
  * @param {Date}   [now]
  * @returns {{ isOpen: boolean, nextOpenAt: string|null }}
  */
-function calculateOpenStatus(workingHours, now = new Date()) {
-  const fallback = { isOpen: false, nextOpenAt: null };
+function calculateOpenStatus(workingHours, now = new Date(), manualStatus = "auto") {
+  const fallback = { isOpen: false, nextOpenAt: null, override: false };
+
+  if (manualStatus === "open") {
+    return { isOpen: true, nextOpenAt: null, override: true };
+  }
+  if (manualStatus === "closed") {
+    return { isOpen: false, nextOpenAt: null, override: true };
+  }
+
   if (!workingHours || typeof workingHours !== "object") return fallback;
 
   const minutes = now.getHours() * 60 + now.getMinutes();
@@ -77,7 +85,7 @@ function calculateOpenStatus(workingHours, now = new Date()) {
     }
   }
 
-  return { isOpen, nextOpenAt };
+  return { isOpen, nextOpenAt, override: false };
 }
 
 module.exports = { calculateOpenStatus, DAY_KEYS };

@@ -20,7 +20,7 @@ const getShopBySlug = asyncHandler(async (req, res) => {
   const shop = await shopService.getShopBySlug(req.params.slug);
   res.json({
     success: true,
-    data: { ...shop.toPublicJSON(), openStatus: calculateOpenStatus(shop.workingHours) },
+    data: { ...shop.toPublicJSON(), openStatus: calculateOpenStatus(shop.workingHours, new Date(), shop.manualStatus) },
   });
 });
 

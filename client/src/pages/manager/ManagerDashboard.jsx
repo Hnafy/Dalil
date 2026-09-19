@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import { Eye, Phone, MapPin, MessageCircle, TrendingUp } from "lucide-react";
-import { getManagerAnalytics } from "../../services/managerService";
+import { Eye, Phone, MapPin, MessageCircle, TrendingUp, Power } from "lucide-react";
+import { toast } from "sonner";
+import { getManagerAnalytics, setManualStatus } from "../../services/managerService";
 import StatCard from "../../components/dashboard/StatCard";
 import SimpleBarChart from "../../components/dashboard/SimpleBarChart";
+import StatusBadge from "../../components/common/StatusBadge";
+import Spinner from "../../components/common/Spinner";
 import { SkeletonTable } from "../../components/common/SkeletonCard";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import { useShopStatus } from "../../hooks/useShopStatus";
 import { formatViews } from "../../utils/formatters";
 import { useTranslation } from "react-i18next";
 import { localize } from "../../utils/i18n";
@@ -13,20 +17,46 @@ export default function ManagerDashboard() {
   const { t } = useTranslation();
   usePageMeta(t("meta.managerDashboard"), "");
   const [data, setData] = useState(null);
+  const [manualStatus, setManualStatusState] = useState("auto");
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     let active = true;
     getManagerAnalytics()
-      .then((res) => active && setData(res.data))
+      .then((res) => {
+        if (!active) return;
+        setData(res.data);
+        setManualStatusState(res.data.shop.manualStatus || "auto");
+      })
       .catch(() => active && setData(null));
     return () => {
       active = false;
     };
   }, []);
 
+  const handleSetStatus = async (status) => {
+    setSaving(true);
+    try {
+      await setManualStatus(status);
+      setManualStatusState(status);
+      toast.success(
+        status === "open"
+          ? t("managerDashboard.setManualOpen")
+          : status === "closed"
+          ? t("managerDashboard.setManualClose")
+          : t("managerDashboard.setManualAuto")
+      );
+    } catch {
+      toast.error(t("managerDashboard.failedSetStatus"));
+    } finally {
+      setSaving(false);
+    }
+  };
+
   if (!data) return <SkeletonTable rows={4} cols={4} />;
 
   const { shop, totals, ranges, clicks, trend } = data;
+  const openStatus = useShopStatus(shop.workingHours, manualStatus);
 
   const clicksList = [
     { label: t("managerDashboard.phoneClicks"), value: clicks.phone_click || 0, icon: Phone, color: "text-blue-600 bg-blue-50 dark:text-blue-300 dark:bg-blue-500/10" },
@@ -41,6 +71,46 @@ export default function ManagerDashboard() {
         <div>
           <h2 className="text-lg font-bold text-slate-900">{localize(shop, "name")}</h2>
           <p className="text-sm text-slate-500">{t("managerDashboard.assignedShop", { views: formatViews(shop.views) })}</p>
+        </div>
+      </div>
+
+      {/* Instant Status Control */}
+      <div className="card p-5">
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-950/40 dark:text-brand-300">
+              <Power className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-sm font-bold text-slate-900">{t("managerDashboard.instantStatusTitle")}</p>
+              <p className="text-sm text-slate-500">{t("managerDashboard.instantStatusHint")}</p>
+            </div>
+          </div>
+          <div className="ms-auto flex flex-wrap items-center gap-2">
+            <StatusBadge openStatus={openStatus} />
+            <button
+              onClick={() => handleSetStatus("open")}
+              disabled={saving || manualStatus === "open"}
+              className={`btn text-sm ${manualStatus === "open" ? "bg-emerald-100 text-emerald-700 ring-1 ring-emerald-300" : "btn-primary"}`}
+            >
+              {saving && <Spinner size="sm" />}
+              {t("managerDashboard.instantOpen")}
+            </button>
+            <button
+              onClick={() => handleSetStatus("closed")}
+              disabled={saving || manualStatus === "closed"}
+              className={`btn text-sm ${manualStatus === "closed" ? "bg-red-100 text-red-600 ring-1 ring-red-300" : "btn-secondary"}`}
+            >
+              {t("managerDashboard.instantClose")}
+            </button>
+            <button
+              onClick={() => handleSetStatus("auto")}
+              disabled={saving || manualStatus === "auto"}
+              className={`btn text-sm ${manualStatus === "auto" ? "bg-slate-200 text-slate-700 ring-1 ring-slate-300" : "btn-secondary"}`}
+            >
+              {t("managerDashboard.instantAuto")}
+            </button>
+          </div>
         </div>
       </div>
 

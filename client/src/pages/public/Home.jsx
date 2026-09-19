@@ -18,7 +18,6 @@ export default function Home() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [categories, setCategories] = useState(null);
-  const [popular, setPopular] = useState(null);
   const [latest, setLatest] = useState(null);
 
   useEffect(() => {
@@ -26,9 +25,6 @@ export default function Home() {
     getCategories()
       .then((res) => active && setCategories(res.data.categories || []))
       .catch(() => active && setCategories([]));
-    getShops({ sort: "views", limit: 6 })
-      .then((res) => active && setPopular(res.data.shops || []))
-      .catch(() => active && setPopular([]));
     getShops({ sort: "latest", limit: 6 })
       .then((res) => active && setLatest(res.data.shops || []))
       .catch(() => active && setLatest([]));
@@ -37,7 +33,7 @@ export default function Home() {
     };
   }, []);
 
-  const loading = categories === null || popular === null || latest === null;
+  const loading = categories === null || latest === null;
 
   const submitSearch = (e) => {
     e.preventDefault();
@@ -119,7 +115,7 @@ export default function Home() {
       </section>
 
       {/* Categories */}
-      <section className="container-page py-16">
+      <section className="container-page hidden py-16 sm:block">
         <SectionHeading
           eyebrow={t("home.categoriesEyebrow")}
           title={t("home.categoriesTitle")}
@@ -156,28 +152,6 @@ export default function Home() {
             })}
           </div>
         )}
-      </section>
-
-      {/* Popular */}
-      <section className="border-y border-slate-200 bg-surface py-16">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow={t("home.popularEyebrow")}
-            title={t("home.popularTitle")}
-            subtitle={t("home.popularSubtitle", { area: AREA_NAME })}
-          />
-          {loading ? (
-            <SkeletonGrid count={3} />
-          ) : popular.length === 0 ? (
-            <EmptyState title={t("home.noPopularTitle")} subtitle={t("home.noPopularSubtitle")} />
-          ) : (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {popular.map((shop, i) => (
-                <ShopCard key={shop.id} shop={shop} featured={i === 0} />
-              ))}
-            </div>
-          )}
-        </div>
       </section>
 
       {/* Latest */}

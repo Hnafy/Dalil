@@ -18,7 +18,7 @@ const getMyShop = asyncHandler(async (req, res) => {
   if (!shop) throw new AppError(404, "Assigned shop not found.");
   res.json({
     success: true,
-    data: { ...shop.toPublicJSON(), openStatus: calculateOpenStatus(shop.workingHours) },
+    data: { ...shop.toPublicJSON(), openStatus: calculateOpenStatus(shop.workingHours, new Date(), shop.manualStatus) },
   });
 });
 
@@ -28,7 +28,7 @@ const updateMyShop = asyncHandler(async (req, res) => {
   const shop = await Shop.findById(shopId);
   if (!shop) throw new AppError(404, "Assigned shop not found.");
 
-  const allowed = ["description", "descriptionAr", "phone", "whatsapp", "address", "latitude", "longitude", "googleMapsUrl", "nameAr"];
+  const allowed = ["description", "descriptionAr", "phone", "whatsapp", "address", "latitude", "longitude", "googleMapsUrl", "nameAr", "manualStatus"];
   allowed.forEach((f) => {
     if (req.body[f] !== undefined) shop[f] = req.body[f];
   });

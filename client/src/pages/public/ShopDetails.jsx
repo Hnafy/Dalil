@@ -47,7 +47,7 @@ export default function ShopDetails() {
     };
   }, [slug]);
 
-  const openStatus = useShopStatus(shop?.workingHours);
+  const openStatus = useShopStatus(shop?.workingHours, shop?.manualStatus);
 
   if (status === "loading") {
     return (

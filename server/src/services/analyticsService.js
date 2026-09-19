@@ -4,6 +4,7 @@ const User = require("../models/User");
 const Category = require("../models/Category");
 const { AppError } = require("../middleware/errorHandler");
 const { localDayString, dayStringOffset } = require("../utils/dateHelpers");
+const { calculateOpenStatus } = require("../utils/calculateOpenStatus");
 
 const CLICK_TYPES = new Set([
   "phone_click",
@@ -162,7 +163,7 @@ async function getManagerOverview(shopId) {
   });
 
   return {
-    shop: { id: shop._id, name: shop.name, nameAr: shop.nameAr, slug: shop.slug, views: shop.views },
+    shop: { id: shop._id, name: shop.name, nameAr: shop.nameAr, slug: shop.slug, views: shop.views, workingHours: shop.workingHours, manualStatus: shop.manualStatus, openStatus: calculateOpenStatus(shop.workingHours, new Date(), shop.manualStatus) },
     totals: { totalViews },
     ranges: { viewsToday, viewsWeek, viewsMonth },
     clicks,

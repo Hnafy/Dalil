@@ -36,6 +36,7 @@ router.patch(
     body("latitude").optional({ nullable: true }).isFloat({ min: -90, max: 90 }),
     body("longitude").optional({ nullable: true }).isFloat({ min: -180, max: 180 }),
     body("googleMapsUrl").optional({ values: "falsy" }).isURL({ require_protocol: true }).withMessage("Google Maps link must be a valid URL."),
+    body("manualStatus").optional().isIn(["auto", "open", "closed"]).withMessage("Invalid manual status value."),
     body("socialLinks").optional().isObject(),
     body("socialLinks.facebook").optional().isString(),
     body("socialLinks.instagram").optional().isString(),

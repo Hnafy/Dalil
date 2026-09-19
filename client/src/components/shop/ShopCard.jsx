@@ -11,7 +11,7 @@ import { localize } from "../../utils/i18n";
 
 export default function ShopCard({ shop, featured = false }) {
   const { t } = useTranslation();
-  const openStatus = useShopStatus(shop.workingHours);
+  const openStatus = useShopStatus(shop.workingHours, shop.manualStatus);
   const [copied, setCopied] = useState(false);
   const image = shop.images?.[0]?.url;
   const Icon = categoryIcon(shop.category?.slug, shop.category?.icon);

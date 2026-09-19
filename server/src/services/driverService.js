@@ -24,7 +24,7 @@ async function listDrivers({ search = "", vehicleType = "", page = 1, limit = 10
   const totalPages = Math.max(1, Math.ceil(total / limit));
   const safePage = Math.min(Math.max(1, page), totalPages);
 
-  const stats = { total: 0, motorcycle: 0, tuk_tuk: 0, private_car: 0, pickup_truck: 0 };
+  const stats = { total: 0, motorcycle: 0, tuk_tuk: 0, private_car: 0, pickup_truck: 0, bicycle: 0, tricycle: 0 };
   statsRows.forEach((r) => {
     stats.total += r.count;
     if (r._id) stats[r._id] = r.count;
@@ -46,7 +46,7 @@ async function listPublicDrivers({ vehicleType = "" }) {
     Driver.aggregate([{ $group: { _id: "$vehicleType", count: { $sum: 1 } } }]),
   ]);
 
-  const stats = { total: 0, motorcycle: 0, tuk_tuk: 0, private_car: 0, pickup_truck: 0 };
+  const stats = { total: 0, motorcycle: 0, tuk_tuk: 0, private_car: 0, pickup_truck: 0, bicycle: 0, tricycle: 0 };
   statsRows.forEach((r) => {
     stats.total += r.count;
     if (r._id) stats[r._id] = r.count;

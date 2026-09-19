@@ -461,7 +461,16 @@
     "phoneClicks": "نقرات الهاتف",
     "whatsappClicks": "نقرات واتساب",
     "mapsClicks": "نقرات الخرائط",
-    "websiteClicks": "نقرات الموقع"
+    "websiteClicks": "نقرات الموقع",
+    "instantStatusTitle": "التحكم الفوري في حالة المحل",
+    "instantStatusHint": "افتح أو أغلق المحل الآن، وتجاوز مواعيد العمل الثابتة.",
+    "instantOpen": "فتح فوري",
+    "instantClose": "غلق فوري",
+    "instantAuto": "المواعيد التلقائية",
+    "setManualOpen": "تم فتح المحل فورًا.",
+    "setManualClose": "تم غلق المحل فورًا.",
+    "setManualAuto": "تم العودة إلى المواعيد التلقائية.",
+    "failedSetStatus": "تعذر تحديث حالة المحل."
   },
   "managerShopEdit": {
     "failedToLoad": "تعذر تحميل المحل الخاص بك.",
@@ -542,8 +551,10 @@
     "vehicleTypes": {
       "motorcycle": "موتوسيكل",
       "tuk_tuk": "توك توك",
-      "private_car": "عربية ملاكي ",
-      "pickup_truck": " عربية نص نقل "
+      "private_car": "عربية ملاكي",
+      "pickup_truck": "عربية نص نقل",
+      "bicycle": "عجل",
+      "tricycle": "تروسيكل"
     },
     "allTypes": "كل السائقين",
     "eyebrow": "سائقو التوصيل",

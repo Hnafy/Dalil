@@ -140,7 +140,7 @@ router.post(
       .isLength({ max: 20 })
       .matches(/^\+?[0-9][0-9\s-]{8,19}$/)
       .withMessage("Enter a valid mobile number."),
-    body("vehicleType").isIn(["motorcycle", "tuk_tuk", "private_car", "pickup_truck"]).withMessage("Invalid vehicle type."),
+    body("vehicleType").isIn(["motorcycle", "tuk_tuk", "private_car", "pickup_truck", "bicycle", "tricycle"]).withMessage("Invalid vehicle type."),
   ],
   runValidation,
   adminController.createDriver
@@ -158,7 +158,7 @@ router.patch(
       .isLength({ max: 20 })
       .matches(/^\+?[0-9][0-9\s-]{8,19}$/)
       .withMessage("Enter a valid mobile number."),
-    body("vehicleType").optional().isIn(["motorcycle", "tuk_tuk", "private_car", "pickup_truck"]).withMessage("Invalid vehicle type."),
+    body("vehicleType").optional().isIn(["motorcycle", "tuk_tuk", "private_car", "pickup_truck", "bicycle", "tricycle"]).withMessage("Invalid vehicle type."),
     body("removePhoto").optional().isBoolean().withMessage("Invalid removePhoto value."),
   ],
   runValidation,

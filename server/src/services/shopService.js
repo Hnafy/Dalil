@@ -75,7 +75,7 @@ async function listShops({ search = "", category, openNow = false, page = 1, lim
 
   if (openNow) {
     const all = await baseFind().limit(500);
-    const filtered = all.filter((s) => calculateOpenStatus(s.workingHours).isOpen);
+    const filtered = all.filter((s) => calculateOpenStatus(s.workingHours, new Date(), s.manualStatus).isOpen);
     shops = filtered;
     total = filtered.length;
   } else {
@@ -90,7 +90,7 @@ async function listShops({ search = "", category, openNow = false, page = 1, lim
 
   const data = shops.map((s) => ({
     ...s.toPublicJSON(),
-    openStatus: calculateOpenStatus(s.workingHours),
+    openStatus: calculateOpenStatus(s.workingHours, new Date(), s.manualStatus),
   }));
 
   return { shops: data, pagination: { page: safePage, limit, total, totalPages } };

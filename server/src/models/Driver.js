@@ -6,7 +6,7 @@ const driverSchema = new mongoose.Schema(
     phone: { type: String, required: [true, "Mobile number is required"], unique: true, trim: true, maxlength: 20 },
     vehicleType: {
       type: String,
-      enum: ["motorcycle", "tuk_tuk", "private_car", "pickup_truck"],
+      enum: ["motorcycle", "tuk_tuk", "private_car", "pickup_truck", "bicycle", "tricycle"],
       required: [true, "Vehicle type is required"],
     },
     photo: {

@@ -461,7 +461,16 @@
     "phoneClicks": "Phone Clicks",
     "whatsappClicks": "WhatsApp Clicks",
     "mapsClicks": "Maps Clicks",
-    "websiteClicks": "Website Clicks"
+    "websiteClicks": "Website Clicks",
+    "instantStatusTitle": "Instant Shop Status",
+    "instantStatusHint": "Force the shop open or closed right now, overriding fixed working hours.",
+    "instantOpen": "Open Now",
+    "instantClose": "Close Now",
+    "instantAuto": "Follow Schedule",
+    "setManualOpen": "Shop is now open.",
+    "setManualClose": "Shop is now closed.",
+    "setManualAuto": "Back to automatic schedule.",
+    "failedSetStatus": "Failed to update shop status."
   },
   "managerShopEdit": {
     "failedToLoad": "Failed to load your shop.",
@@ -543,7 +552,9 @@
       "motorcycle": "Motorcycle",
       "tuk_tuk": "Tuk Tuk",
       "private_car": "Private Car",
-      "pickup_truck": "Pickup / Small Transport Truck"
+      "pickup_truck": "Pickup Truck",
+      "bicycle": "Bicycle",
+      "tricycle": "Tricycle"
     },
     "allTypes": "All Drivers",
     "eyebrow": "Delivery Drivers",
